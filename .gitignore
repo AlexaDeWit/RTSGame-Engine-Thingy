@@ -1,0 +1,9 @@
+Assets/*
+*.ods
+*.ods#
+maps/*
+Useless Stuff/*
+
+*~
+*.swp
+*.swo
