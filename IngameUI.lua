@@ -1,5 +1,5 @@
 local UILib = {}
-local background = love.graphics.newImage( "Assets/UI/HUD2.png" )
+local background = love.graphics.newImage( "Assets/UI/ui.png" )
 
 function UILib.initialize()
 
@@ -30,6 +30,10 @@ function UILib.initialize()
     pos.x = ( love.graphics.getWidth() / 2 ) - ( background:getWidth() / 2 )
     pos.y = love.graphics.getHeight() - background:getHeight()
     return pos
+  end
+
+  function UI.getHeight()
+    return background:getHeight()
   end
 
   return UI

@@ -9,7 +9,7 @@ local ClientLib = {}
 
     function getViewportSize()
       return {
-        height = love.graphics.getHeight(),
+        height = love.graphics.getHeight() - UI.getHeight(),
         width = love.graphics.getWidth()
       }
     end
