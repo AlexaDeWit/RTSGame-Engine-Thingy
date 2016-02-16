@@ -33,7 +33,7 @@ function love.update()
 end
 
 function love.draw()
-  client.draw( mapCanvas )
+  client.draw( mapCanvas, game )
 end
 
 function love.keypressed( key, scancode, isrepeat )

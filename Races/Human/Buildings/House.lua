@@ -12,13 +12,17 @@ HouseConstructor.buildCost = {
   wood = 100,
   gold = 0
 }
-HouseConstructor.visionRange = 8
+HouseConstructor.visionRange = 3
 
 
-function HouseConstructor.new()
+function HouseConstructor.new( owner )
   local House = {}
 
   House.hp = HouseConstructor.maxHP
+
+  function House.getOwner()
+    return owner
+  end
 
   return House
 end

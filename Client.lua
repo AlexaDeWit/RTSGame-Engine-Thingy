@@ -26,13 +26,19 @@ local ClientLib = {}
     }
 
 
-    function Client.draw( mapCanvas )
-      drawViewport( mapCanvas ) 
+    function Client.draw( mapCanvas, game )
+      drawViewport( mapCanvas, game ) 
       UI.draw()
     end
 
-    function drawViewport( mapCanvas )
+    function drawViewport( mapCanvas, game )
       local viewportSize = getViewportSize()
+      local viewportBounds = {
+        x  =  Viewport.x,
+        ex =  viewportSize.width + Viewport.x,
+        y  =  Viewport.y,
+        ey =  viewportSize.height + Viewport.y
+      }
       local viewportQuad = love.graphics.newQuad(
         Viewport.x,
         Viewport.y,
@@ -41,7 +47,18 @@ local ClientLib = {}
         mapWidth,
         mapHeight
       )
+      local buildingsToRender = game.getBuildingsWithin( 
+        viewportBounds.x,
+        viewportBounds.y,
+        viewportBounds.ex,
+        viewportBounds.ey
+      )
+      --Draw the viewport regon
       love.graphics.draw( mapCanvas, viewportQuad )
+      --Draw the units present in that area
+      for k,v in pairs( buildingsToRender ) do
+        love.graphics.draw( k.getImage(), k.getFrameQuad(), v.x - Viewport.x, v.y - Viewport.y )
+      end
     end
 
     function Client.panCameraIfNeeded()
