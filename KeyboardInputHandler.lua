@@ -2,6 +2,8 @@ local UserSettings = require( "UserSettings" )
 local KeyboardInputHandler = {}
 local KeyDown = {}
 
+KeyDown.Exit_Game = love.event.quit
+
 KeyDown.MapScroll_Down = function( scancode, clientContext )
   clientContext.scrollViewport( { x = 0, y = UserSettings.scrollSpeed } )
 end
