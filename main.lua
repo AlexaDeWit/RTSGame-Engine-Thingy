@@ -11,7 +11,7 @@ function love.load()
   Human = require( "Races/Human/Human" )
 
   --Set up map
-  map = MapLoader.load( "maps/theplains" )
+  map = MapLoader.load( "maps/thegreatplains" )
   mapCanvas = map.renderMap()
 
 
