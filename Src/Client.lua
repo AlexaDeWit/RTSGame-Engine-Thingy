@@ -1,7 +1,7 @@
 local ClientLib = {}
 
   local UserSettings = require( "UserSettings" )
-  local UILib = require( "IngameUI" )
+  local UILib = require( "Src/IngameUI" )
 
   function ClientLib.initialize( mapWidth, mapHeight )
     local Client = {}

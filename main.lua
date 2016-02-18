@@ -1,14 +1,14 @@
 function love.load()
 
   --Load game libs
-  MapLoader = require( "MapLoader" )
+  MapLoader = require( "Src/MapLoader" )
   KeyMap = require( "KeyMap" )
-  KeyboardInputHandler = require( "KeyboardInputHandler" )
-  ClientLib = require( "Client" )
-  GameLib = require( "Game" )
-  Mouse = require( "Mouse" )
-  Player = require( "Player" )
-  Human = require( "Races/Human/Human" )
+  KeyboardInputHandler = require( "Src/KeyboardInputHandler" )
+  ClientLib = require( "Src/Client" )
+  GameLib = require( "Src/Game" )
+  Mouse = require( "Src/Mouse" )
+  Player = require( "Src/Player" )
+  Human = require( "Src/Races/Human/Human" )
 
   --Set up map
   map = MapLoader.load( "maps/thegreatplains" )
