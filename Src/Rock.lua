@@ -3,7 +3,7 @@ local RockConstructor = {}
 RockConstructor.tileset = love.graphics.newImage( "Assets/Neutral/rock.png" )
 RockConstructor.width = 64
 RockConstructor.height = 64
-RockConstructor.startingResource = 1000
+RockConstructor.startingResource = 1500
 RockConstructor.quads = {}
 
 function RockConstructor.new()
