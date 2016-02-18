@@ -183,6 +183,11 @@ function MapLoader.load( filename )
     return spawnLayer.objects
   end
 
+  function Map.getTreeSpawns()
+    local treeLayer = getLayerByName("Trees")
+    return treeLayer.objects
+  end
+
   return Map
 end
 

@@ -53,12 +53,22 @@ local ClientLib = {}
         viewportBounds.ex,
         viewportBounds.ey
       )
+      local treesToRender = game.getTreesWithin( 
+        viewportBounds.x,
+        viewportBounds.y,
+        viewportBounds.ex,
+        viewportBounds.ey
+      )
       --Draw the viewport regon
       love.graphics.draw( mapCanvas, viewportQuad )
       --Draw the units present in that area
       for k,v in pairs( buildingsToRender ) do
         love.graphics.draw( k.getImage(), k.getFrameQuad(), v.x - Viewport.x, v.y - Viewport.y )
       end
+      for k,v in pairs( treesToRender ) do
+        love.graphics.draw( k.getImage(), k.getFrameQuad(), v.x - Viewport.x, v.y - Viewport.y )
+      end
+
     end
 
     function Client.panCameraIfNeeded()
