@@ -1,11 +1,13 @@
 local GameLib = {}
 local Tree = require( "Src/Tree" )
+local Rock = require( "Src/Rock" )
 
 function GameLib.new( map, players )
   local Game = {}
   local unitList = {}
   local buildingList = {}
   local treesList = {}
+  local rocksList = {}
   local playerSpawns = map.getPlayerSpawns()
 
   function spawnPlayers()
@@ -29,6 +31,16 @@ function GameLib.new( map, players )
       }
     end
   end
+  
+    function spawnRocks()
+    local rockObjects = map.getRockSpawns()
+    for i,v in ipairs(rockObjects) do
+      rocksList[ Rock.new() ] = {
+        x = v.x,
+        y = v.y
+      }
+    end
+  end
 
   function Game.getTreesWithin( x, y, ex, ey )
     local trees = {}
@@ -42,6 +54,20 @@ function GameLib.new( map, players )
       end
     end
     return trees
+  end
+
+  function Game.getRocksWithin( x, y, ex, ey )
+    local rocks = {}
+    for k,v in pairs( rocksList ) do
+      if v.x > x and v.y > y and v.x < ex and v.y < ey then
+        if k.isPendingDelete() then
+          table.remove( rocksList, k )
+        else
+          rocks[k] = v
+        end
+      end
+    end
+    return rocks
   end
 
   function Game.getBuildingsWithin( x, y, ex, ey )
@@ -59,6 +85,7 @@ function GameLib.new( map, players )
 
   spawnPlayers()
   spawnTrees()
+  spawnRocks()
 
   return Game
 end

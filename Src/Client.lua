@@ -59,6 +59,13 @@ local ClientLib = {}
         viewportBounds.ex,
         viewportBounds.ey
       )
+      local rocksToRender = game.getRocksWithin( 
+        viewportBounds.x,
+        viewportBounds.y,
+        viewportBounds.ex,
+        viewportBounds.ey
+      )
+      
       --Draw the viewport regon
       love.graphics.draw( mapCanvas, viewportQuad )
       --Draw the units present in that area
@@ -68,7 +75,9 @@ local ClientLib = {}
       for k,v in pairs( treesToRender ) do
         love.graphics.draw( k.getImage(), k.getFrameQuad(), v.x - Viewport.x, v.y - Viewport.y )
       end
-
+      for k,v in pairs( rocksToRender ) do
+        love.graphics.draw( k.getImage(), k.getFrameQuad(), v.x - Viewport.x, v.y - Viewport.y )
+      end
     end
 
     function Client.panCameraIfNeeded()

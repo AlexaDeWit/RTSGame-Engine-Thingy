@@ -187,6 +187,11 @@ function MapLoader.load( filename )
     local treeLayer = getLayerByName("Trees")
     return treeLayer.objects
   end
+  
+  function Map.getRockSpawns()
+	local rockLayer = getLayerByName("Mines")
+	return rockLayer.objects
+  end
 
   return Map
 end
