@@ -15,7 +15,8 @@ function GameLib.new( map, players )
       error( "Insufficient spawn locations available" )
     end
     for i,v in ipairs( players ) do
-      buildingList[v.getRace().Buildings[v.getRace().StartingBuilding].new( player )] = {
+      local building = v.getRace().Buildings[v.getRace().StartingBuilding]
+      buildingList[building( player )] = {
         x = playerSpawns[i].x,
         y = playerSpawns[i].y
       }

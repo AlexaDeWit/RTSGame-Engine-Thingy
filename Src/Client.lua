@@ -70,7 +70,7 @@ local ClientLib = {}
       love.graphics.draw( mapCanvas, viewportQuad )
       --Draw the units present in that area
       for k,v in pairs( buildingsToRender ) do
-        love.graphics.draw( k.getImage(), k.getFrameQuad(), v.x - Viewport.x, v.y - Viewport.y )
+        love.graphics.draw( k:getImage(), k:getFrameQuad(), v.x - Viewport.x, v.y - Viewport.y )
       end
       for k,v in pairs( treesToRender ) do
         love.graphics.draw( k:getImage(), k:getFrameQuad(), v.x - Viewport.x, v.y - Viewport.y )

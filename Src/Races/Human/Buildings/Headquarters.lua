@@ -1,64 +1,28 @@
-local HeadquartersConstructor = {}
+local class = require( "Lib/middleclass" )
+local Actor = require( "Src/Actor" )
+local Headquarters = class("Headquarters")
+Headquarters:include(Actor)
 
-HeadquartersConstructor.tileset = love.graphics.newImage( "Assets/BuildingsAndUnits/Human/Buildings/hq2.png" )
-HeadquartersConstructor.width = 96
-HeadquartersConstructor.height = 96
-HeadquartersConstructor.maxHP = 1250
-HeadquartersConstructor.healthRegen = 0
-HeadquartersConstructor.armor = 2
-HeadquartersConstructor.buildTime = 60
-HeadquartersConstructor.attack = nil
-HeadquartersConstructor.buildCost = {
+Headquarters.static.tileset = love.graphics.newImage( "Assets/BuildingsAndUnits/Human/Buildings/hq2.png" )
+Headquarters.static.maxHP = 1250
+Headquarters.static.healthRegen = 0
+Headquarters.static.armor = 2
+Headquarters.static.buildTime = 60
+Headquarters.static.attack = nil
+Headquarters.static.buildCost = {
   wood = 500,
   gold = 0
 }
-HeadquartersConstructor.visionRange = 8
-HeadquartersConstructor.quads = {}
+Headquarters.static.visionRange = 8
 
-
-function HeadquartersConstructor.new( owner )
-  local Headquarters = {}
-
-  Headquarters.hp = HeadquartersConstructor.maxHP
-
-  function Headquarters.getOwner()
-    return owner
-  end
-
-  function Headquarters.getImage()
-    return HeadquartersConstructor.tileset
-  end
-
-  function Headquarters.getFrameQuad()
-    return HeadquartersConstructor.quads[1]
-  end
-
-  return Headquarters
+function Headquarters:initialize( owner )
+  self.owner = owner
+  self.setActorData( Headquarters, Headquarters.tileset, 96, 96 )
+  self.hp = Headquarters.maxHP
 end
 
-function buildQuads()
-  local quads = {}
-  local i = 1
-  local tileH = HeadquartersConstructor.height
-  local imageHeight = HeadquartersConstructor.tileset:getHeight()
-  local tileW = HeadquartersConstructor.width
-  local imageWidth = HeadquartersConstructor.tileset:getWidth()
-  for y=0, tileH - tileH, tileH do
-    for x=0, tileW - tileW, tileW do
-      quads[i] = love.graphics.newQuad(
-      x,
-      y,
-      tileW,
-      tileH,
-      imageWidth,
-      imageHeight
-      )
-      i = i + 1
-    end
-  end
-  HeadquartersConstructor.quads = quads
+function Headquarters:getOwner()
+  return self.owner
 end
 
-buildQuads()
-
-return HeadquartersConstructor
+return Headquarters
