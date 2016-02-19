@@ -76,7 +76,7 @@ local ClientLib = {}
         love.graphics.draw( k:getImage(), k:getFrameQuad(), v.x - Viewport.x, v.y - Viewport.y )
       end
       for k,v in pairs( rocksToRender ) do
-        love.graphics.draw( k.getImage(), k.getFrameQuad(), v.x - Viewport.x, v.y - Viewport.y )
+        love.graphics.draw( k:getImage(), k:getFrameQuad(), v.x - Viewport.x, v.y - Viewport.y )
       end
     end
 

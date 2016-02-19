@@ -35,7 +35,7 @@ function GameLib.new( map, players )
     function spawnRocks()
     local rockObjects = map.getRockSpawns()
     for i,v in ipairs(rockObjects) do
-      rocksList[ Rock.new() ] = {
+      rocksList[ Rock() ] = {
         x = v.x,
         y = v.y
       }
@@ -60,7 +60,7 @@ function GameLib.new( map, players )
     local rocks = {}
     for k,v in pairs( rocksList ) do
       if v.x > x and v.y > y and v.x < ex and v.y < ey then
-        if k.isPendingDelete() then
+        if k:isPendingDelete() then
           table.remove( rocksList, k )
         else
           rocks[k] = v

@@ -1,55 +1,21 @@
-local RockConstructor = {}
+local class = require( "Lib/middleclass" )
+local Actor = require( "Src/Actor" )
+local Rock = class("Rock")
+Rock:include(Actor)
 
-RockConstructor.tileset = love.graphics.newImage( "Assets/Neutral/rock.png" )
-RockConstructor.width = 64
-RockConstructor.height = 64
-RockConstructor.startingResource = 1500
-RockConstructor.quads = {}
 
-function RockConstructor.new()
-  local Rock = {}
+Rock.static.tileset = love.graphics.newImage( "Assets/Neutral/rock.png" )
+Rock.static.startingResource = 1500
 
-  Rock.remaining = RockConstructor.startingResource
-
-  function Rock.getImage( )
-    return RockConstructor.tileset
-  end
-
-  function Rock.getFrameQuad()
-    return RockConstructor.quads[1]
-  end
-
-  function Rock.isPendingDelete()
-    return Rock.remaining <= 0
-  end
-
-  return Rock
-
+function Rock:initialize()
+  self:setActorData( Rock.tileset, 64, 64 )
+  self.remaining = Rock.startingResource
 end
 
-function buildQuads()
-  local quads = {}
-  local i = 1
-  local tileH = RockConstructor.height
-  local imageHeight = RockConstructor.tileset:getHeight()
-  local tileW = RockConstructor.width
-  local imageWidth = RockConstructor.tileset:getWidth()
-  for y=0, tileH - tileH, tileH do
-    for x=0, tileW - tileW, tileW do
-      quads[i] = love.graphics.newQuad(
-      x,
-      y,
-      tileW,
-      tileH,
-      imageWidth,
-      imageHeight
-      )
-      i = i + 1
-    end
-  end
-  RockConstructor.quads = quads
+function Rock:isPendingDelete()
+  return self.remaining <= 0
 end
 
-buildQuads()
+return Rock
 
-return RockConstructor
+
