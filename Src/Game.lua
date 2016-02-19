@@ -25,7 +25,7 @@ function GameLib.new( map, players )
   function spawnTrees()
     local treeObjects = map.getTreeSpawns()
     for i,v in ipairs(treeObjects) do
-      treesList[ Tree.new() ] = {
+      treesList[ Tree() ] = {
         x = v.x,
         y = v.y
       }
@@ -46,7 +46,7 @@ function GameLib.new( map, players )
     local trees = {}
     for k,v in pairs( treesList ) do
       if v.x > x and v.y > y and v.x < ex and v.y < ey then
-        if k.isPendingDelete() then
+        if k:isPendingDelete() then
           table.remove( treesList, k )
         else
           trees[k] = v
