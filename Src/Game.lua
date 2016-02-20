@@ -32,8 +32,8 @@ function GameLib.new( map, players )
       }
     end
   end
-  
-    function spawnRocks()
+
+  function spawnRocks()
     local rockObjects = map.getRockSpawns()
     for i,v in ipairs(rockObjects) do
       rocksList[ Rock() ] = {
