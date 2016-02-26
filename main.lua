@@ -1,5 +1,8 @@
 function love.load()
 
+  --set up RNG
+  math.randomseed( os.time() )
+  math.random()
   --Load game libs
   MapLoader = require( "Src/MapLoader" )
   KeyMap = require( "KeyMap" )
@@ -17,8 +20,10 @@ function love.load()
 
   --set up a test player
   player = Player.new( Human, "Alexa", { r = 100, g = 100, b = 255 } ) 
+  player2 = Player.new( Human, "Barbarian", { r = 255, g = 100, b = 100 } ) 
+
   
-  game = GameLib.new( map, {player})
+  game = GameLib.new( map, {player,player2})
 
   --set up the client
   client = ClientLib.initialize( mapCanvas:getWidth(), mapCanvas:getHeight() )

@@ -1,6 +1,7 @@
 local GameLib = {}
 local Tree = require( "Src/Tree" )
 local Rock = require( "Src/Rock" )
+local _ = require( "Lib/underscore" )
 
 function GameLib.new( map, players )
   local Game = {}
@@ -14,12 +15,21 @@ function GameLib.new( map, players )
     if not ( table.getn(playerSpawns) >= table.getn( players ) ) then
       error( "Insufficient spawn locations available" )
     end
-    for i,v in ipairs( players ) do
-      local building = v.getRace().Buildings[v.getRace().StartingBuilding]
-      buildingList[building( player )] = {
-        x = playerSpawns[i].x,
-        y = playerSpawns[i].y
+    function spawnPlayerWithin( player, availableSpawns )
+      local spawnId = math.random(table.getn(availableSpawns))
+      local spawn = availableSpawns[spawnId]
+      local building = player.getRace().Buildings[player.getRace().StartingBuilding]
+      buildingList[building(player)] = {
+        x = spawn.x,
+        y = spawn.y
       }
+      availableSpawns[spawnId] = nil
+      return _.to_array( availableSpawns )
+    end
+    local remainingSpawns = {}
+    _.extend(remainingSpawns, playerSpawns)
+    for i,v in ipairs( players ) do
+      remainingSpawns = spawnPlayerWithin( v, remainingSpawns )
     end
   end
 
